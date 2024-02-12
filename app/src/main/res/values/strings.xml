@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Rideassistant</string>
+    <string name="app_name" translatable="false">Rideassistant</string>
+    <string name="email_field">Email</string>
+    <string name="phone_field">Phone</string>
+    <string name="password_field">Password</string>
+    <string name="register_button">Start riding</string>
+    <string name="registered_member_already">Already a member?</string>
+    <string name="login">Sign in</string>
 </resources>
