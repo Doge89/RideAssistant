@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="email_field">Correo</string>
+    <string name="phone_field">Teléfono</string>
+    <string name="password_field">Contraseña</string>
+    <string name="register_button">Comienza a viajar</string>
+    <string name="registered_member_already">¿Ya eres usuario?</string>
+    <string name="login">Inicia sesión</string>
+</resources>

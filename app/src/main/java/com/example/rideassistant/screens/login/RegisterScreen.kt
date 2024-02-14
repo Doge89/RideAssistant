@@ -14,16 +14,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -31,19 +29,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.rideassistant.R
 import com.example.rideassistant.navigation.AppRouting
 import com.example.rideassistant.parcelables.Disability
 import com.example.rideassistant.parcelables.RegisterParcelable
+import com.example.rideassistant.viewmodels.auth.RegisterViewModel
 
 @Composable
-fun RegisterScreen(navController: NavController) {
+fun RegisterScreen(
+    navController: NavController,
+    registerViewModel: RegisterViewModel = viewModel()
+) {
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -52,13 +54,14 @@ fun RegisterScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        RegisterBody(navController = navController)
+        RegisterBody(navController = navController, registerViewModel =  registerViewModel)
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RegisterBody(navController: NavController) {
+fun RegisterBody(navController: NavController, registerViewModel: RegisterViewModel) {
+    val registerState by registerViewModel.registerData.collectAsState()
     var userData by rememberSaveable {
         mutableStateOf(RegisterParcelable(
             username = "",
