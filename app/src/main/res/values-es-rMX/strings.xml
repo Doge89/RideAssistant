@@ -6,4 +6,17 @@
     <string name="register_button">Comienza a viajar</string>
     <string name="registered_member_already">¿Ya eres usuario?</string>
     <string name="login">Inicia sesión</string>
+    <string name="next">Siguiente</string>
+    <string name="register">Registrate</string>
+    <string name="name_field">Nombre/s</string>
+    <string name="disability_data_section">Para brindarle un mejor servicio, necesitamos recabar sus problemas. No se preocupe esta información es condifencial</string>
+    <string name="last_name">Apellidos</string>
+    <string name="last_name_field">Apellidos</string>
+    <string name="basic_data_section">Primero queremos conocerte. Para ello necesitamos unos datos</string>
+    <string name="disability_field">Problema de salud</string>
+    <string name="description_field">Descripción</string>
+    <string name="add">Añadir</string>
+    <string name="basic_data">Información Personal</string>
+    <string name="password_section">Por último necesitamos una contraseña para que pueda acceder</string>
+    <string name="visibility">Ocultar información</string>
 </resources>

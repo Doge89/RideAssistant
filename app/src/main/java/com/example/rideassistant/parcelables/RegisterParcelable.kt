@@ -11,7 +11,8 @@ data class Disability(
 
 @Parcelize
 data class RegisterParcelable(
-    var username: String,
+    var name: String,
+    var lastName: String,
     var phone: String,
     var password: String,
     var email: String,

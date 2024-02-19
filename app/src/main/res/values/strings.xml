@@ -1,9 +1,21 @@
 <resources>
     <string name="app_name" translatable="false">Rideassistant</string>
+    <string name="basic_data_section">First, we need to meet you. So we need some data to collect</string>
+    <string name="disability_data_section">To bring a better service, we need to collect your disabilities. Don\'t worry this info no one will know </string>
     <string name="email_field">Email</string>
     <string name="phone_field">Phone</string>
     <string name="password_field">Password</string>
     <string name="register_button">Start riding</string>
     <string name="registered_member_already">Already a member?</string>
     <string name="login">Sign in</string>
+    <string name="next">Next</string>
+    <string name="register">Register</string>
+    <string name="name_field">Name</string>
+    <string name="last_name_field">Last name</string>
+    <string name="disability_field">Disability</string>
+    <string name="description_field">Description</string>
+    <string name="add">Add</string>
+    <string name="basic_data">Personal Info</string>
+    <string name="password_section">Finally, we need a password to ensure the access of the account</string>
+    <string name="visibility">Hide information</string>
 </resources>

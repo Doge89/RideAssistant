@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.update
 class RegisterViewModel: ViewModel() {
     private val _registerData = MutableStateFlow(
         RegisterParcelable(
-        username = "",
+        name = "",
+        lastName = "",
         email = "",
         disabilities = listOf<Disability>(),
         password =  "",
@@ -20,26 +21,22 @@ class RegisterViewModel: ViewModel() {
     ))
     val registerData: StateFlow<RegisterParcelable> = this._registerData.asStateFlow()
 
+    private val _disabilities = MutableStateFlow(mutableListOf<Disability>())
+    val disabilities: StateFlow<MutableList<Disability>> = this._disabilities.asStateFlow()
+
+    private val _hasAllTheData = MutableStateFlow(false)
+    val hasAllTheData: StateFlow<Boolean> = _hasAllTheData.asStateFlow()
+
     fun changeRegisterUserData(
-        username: String?,
-        email: String?,
-        disability: Disability,
-        password: String?,
-        phone: String?
+        registerUserData: RegisterParcelable
     ) {
-        this._registerData.update { currState ->
-            val disList = mutableListOf<Disability>()
-            currState.disabilities.forEach { disability ->
-                disList.add(disability)
-            }
-            disList.add(disability)
-            currState.copy(
-                username = username ?: currState.username,
-                email = email ?: currState.email,
-                disabilities = disList.toList(),
-                password = password ?: currState.password,
-                phone = phone ?: currState.phone
-            )
-        }
+        _registerData.value = registerUserData
     }
+
+    fun addDisability(disability: Disability) {
+        val disabilityCopy = this._disabilities.value
+        disabilityCopy.add(disability)
+        _disabilities.value = disabilityCopy
+    }
+
 }

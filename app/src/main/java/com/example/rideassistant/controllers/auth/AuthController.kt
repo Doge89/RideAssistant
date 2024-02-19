@@ -1,18 +1,23 @@
 package com.example.rideassistant.controllers.auth
 
+import com.example.rideassistant.classes.validators.CoreValidator
+import com.example.rideassistant.parcelables.RegisterParcelable
+
 /**
  * Holds a set of basic functions to authenticate the user in the app*/
-class AuthController() {
+class AuthController(private val _coreValidator: CoreValidator) {
 
-    private lateinit var username: String
+    private lateinit var _userData: RegisterParcelable
 
-    constructor(username: String) : this() {
-        this.username = username;
+    constructor(userData: RegisterParcelable) : this(CoreValidator()) {
+        this._userData = userData;
     }
 
-    fun registerUser() {
+    /**
+     * Check if the first part of the form is valid
+     * @return
+     *  A true value if the object is valid otherwise false*/
+    fun validateBasicData(): Boolean {
 
     }
 }
-
-val auth = AuthController("undertale.9055@gmail.com");

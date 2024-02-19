@@ -10,11 +10,12 @@ import androidx.room.Relation
 data class User (
     @PrimaryKey(autoGenerate = true) val idUser: Int,
     @ColumnInfo(index = true) val email: String,
-    @ColumnInfo(index = true) val phone: String,
-    @ColumnInfo val password: String,
-    @ColumnInfo val name: String,
-    @ColumnInfo val lastName: String,
-    @ColumnInfo val isActive: Boolean,
+    @ColumnInfo(index = true) var phone: String,
+    @ColumnInfo var password: String,
+    @ColumnInfo var name: String,
+    @ColumnInfo var lastName: String,
+    @ColumnInfo var isActive: Boolean,
+    @ColumnInfo var isSignedIn: Boolean,
 )
 
 data class UserHasDisabilities (
