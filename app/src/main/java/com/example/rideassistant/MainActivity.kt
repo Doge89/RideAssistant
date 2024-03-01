@@ -7,10 +7,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.rideassistant.navigation.AppRouter
 import com.example.rideassistant.ui.theme.RideassistantTheme
+import com.google.android.libraries.places.api.Places
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Places.initialize(applicationContext, "AIzaSyDfysX9E3NJCb8hSteP5OkPyIrA1fS9EFs")
         setContent {
             RideassistantTheme(
                 dynamicColor = false

@@ -6,22 +6,31 @@ import androidx.room.Update
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.rideassistant.database.entities.User
+import com.example.rideassistant.database.entities.UserDto
 import com.example.rideassistant.database.entities.UserHasDisabilities
 
 @Dao
 interface UserDao {
     @Transaction
     @Query("SELECT * FROM user")
-    fun getAllUsers(): List<User>
+    suspend fun getAllUsers(): List<User>
 
     @Transaction
     @Query("SELECT * FROM user WHERE phone = :phone LIMIT 1")
-    fun getUserByPhone(phone: String): User
+    suspend fun getUserByPhone(phone: String): User
+
+    @Transaction
+    @Query("SELECT * FROM user WHERE email = :email LIMIT 1")
+    suspend fun getUserByEmail(email: String): User
 
     @Transaction
     @Query("SELECT * FROM user WHERE idUser = :idUser LIMIT 1")
-    fun getUserWithDisabilities(idUser: Int): UserHasDisabilities
+    suspend fun getUserWithDisabilities(idUser: Int): UserHasDisabilities
 
-    @Insert
-    fun insertUser(vararg userData: User)
+    @Transaction
+    @Query("SELECT * FROM user WHERE isSignedIn = 1 LIMIT 1")
+    suspend fun getUserSignedIn(): User
+
+    @Insert(entity = User::class)
+    suspend fun insertUser(vararg userData: UserDto)
 }

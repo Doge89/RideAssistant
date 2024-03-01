@@ -18,4 +18,12 @@
     <string name="basic_data">Personal Info</string>
     <string name="password_section">Finally, we need a password to ensure the access of the account</string>
     <string name="visibility">Hide information</string>
+    <string name="generic_error_message">Something went wrong, please ensure that the data typed is correct</string>
+    <string name="index">Home</string>
+    <string name="profile">Profile</string>
+    <string name="access_denied">Access Denied</string>
+    <string name="permission_denied">To continue using the application, you must habilitate the permission requested</string>
+    <string name="last_name">Last name</string>
+    <string name="search_field">Search</string>
+    <string name="search_field_placeholder">Where do you want to go?</string>
 </resources>

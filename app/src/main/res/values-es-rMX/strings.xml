@@ -10,6 +10,10 @@
     <string name="register">Registrate</string>
     <string name="name_field">Nombre/s</string>
     <string name="disability_data_section">Para brindarle un mejor servicio, necesitamos recabar sus problemas. No se preocupe esta información es condifencial</string>
+    <string name="generic_error_message">Algo paso, por favor revise que la información puesta este correcta</string>
+    <string name="profile">Perfíl</string>
+    <string name="index">Inicio</string>
+    <string name="access_denied">Acceso Denegado</string>
     <string name="last_name">Apellidos</string>
     <string name="last_name_field">Apellidos</string>
     <string name="basic_data_section">Primero queremos conocerte. Para ello necesitamos unos datos</string>
@@ -19,4 +23,7 @@
     <string name="basic_data">Información Personal</string>
     <string name="password_section">Por último necesitamos una contraseña para que pueda acceder</string>
     <string name="visibility">Ocultar información</string>
+    <string name="permission_denied">Para seguir usando la aplicación, es necesario activar el permiso solicitado</string>
+    <string name="search_field">Buscar</string>
+    <string name="search_field_placeholder">¿A donde quieres ir?</string>
 </resources>

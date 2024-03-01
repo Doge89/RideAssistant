@@ -14,8 +14,8 @@ data class User (
     @ColumnInfo var password: String,
     @ColumnInfo var name: String,
     @ColumnInfo var lastName: String,
-    @ColumnInfo var isActive: Boolean,
-    @ColumnInfo var isSignedIn: Boolean,
+    @ColumnInfo(defaultValue = false.toString()) var isActive: Boolean,
+    @ColumnInfo(defaultValue = true.toString()) var isSignedIn: Boolean,
 )
 
 data class UserHasDisabilities (
@@ -25,4 +25,12 @@ data class UserHasDisabilities (
         entityColumn = "idUser",
     )
     val disabilities: List<Disability>
+)
+
+data class UserDto (
+    val name: String,
+    val lastName: String,
+    val email: String,
+    val password: String,
+    val phone: String
 )

@@ -4,7 +4,7 @@ import android.util.Patterns
 
 /**
  * This class contains all the core validations to apply*/
-class CoreValidator {
+open class CoreValidator {
     /**
      * Check if a string is valid
      * @param input The string to check
@@ -21,5 +21,15 @@ class CoreValidator {
     fun isValidEmail(input: String): Boolean {
         if (!this.isValidString(input)) return false
         return Patterns.EMAIL_ADDRESS.matcher(input).matches()
+    }
+
+    /**
+     * Validate if the given string is a valid number phone
+     * @param input The string to check
+     * @return
+     *  True if the string is a valid number phone*/
+    fun isPhoneValid(input: String): Boolean {
+        if (!this.isValidString(input)) return false;
+        return Patterns.PHONE.matcher(input).matches()
     }
 }

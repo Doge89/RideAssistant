@@ -1,6 +1,7 @@
 package com.example.rideassistant.screens.login
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,6 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -55,6 +57,8 @@ import com.example.rideassistant.components.inputs.PasswordInput
 import com.example.rideassistant.components.inputs.PhoneInput
 import com.example.rideassistant.components.inputs.TextInput
 import com.example.rideassistant.components.lists.SimpleList
+import com.example.rideassistant.constants.REGISTER_PAGER_PAGES
+import com.example.rideassistant.controllers.auth.AuthController
 import com.example.rideassistant.navigation.AppRouting
 import com.example.rideassistant.parcelables.Disability
 import com.example.rideassistant.parcelables.RegisterParcelable
@@ -84,10 +88,13 @@ fun RegisterBody(navController: NavController, registerViewModel: RegisterViewMo
     val hasAllDataFilled by registerViewModel.hasAllTheData.collectAsState()
     val disabilities by registerViewModel.disabilities.collectAsState()
     val pagerState = rememberPagerState(pageCount = {
-        4
+        REGISTER_PAGER_PAGES
     })
     val keyboardController = LocalSoftwareKeyboardController.current
     val coroutineScope = rememberCoroutineScope()
+    val currentAppContext = LocalContext.current
+    val authController = AuthController(currentAppContext, registerState)
+    val genericError = stringResource(id = R.string.generic_error_message)
     Column (
         modifier = Modifier
             .fillMaxSize()
@@ -137,6 +144,7 @@ fun RegisterBody(navController: NavController, registerViewModel: RegisterViewMo
                         },
                     )
                 2 -> FormPassword(
+                    password = registerState.password,
                     onSetPassword = {
                         registerViewModel.changeRegisterUserData(
                             registerState.copy(password = it)
@@ -151,7 +159,34 @@ fun RegisterBody(navController: NavController, registerViewModel: RegisterViewMo
                 .fillMaxWidth(),
             onClick = {
                 coroutineScope.launch {
-                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                    when(pagerState.currentPage) {
+                        0 -> {
+                            if (!authController.validateBasicData()) {
+                                Toast.makeText(
+                                    currentAppContext,
+                                    genericError,
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            } else {
+                                pagerState.animateScrollToPage(1)
+                            }
+                        }
+                        1 -> {
+                            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                        }
+                        2 -> {
+                            if (!authController.validatePasswordForm()) {
+                                Toast.makeText(
+                                    currentAppContext,
+                                    genericError,
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                            } else {
+                                authController.createUser()
+                                Toast.makeText(currentAppContext, "Success created", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             },
             colors = ButtonDefaults.buttonColors(
@@ -356,11 +391,9 @@ fun FormDisabilities(
 
 @Composable
 fun FormPassword(
+    password: String,
     onSetPassword: (String) -> Unit,
 ) {
-    var password by remember {
-        mutableStateOf("")
-    }
     Column {
         Text(
             text = stringResource(id = R.string.password_field),
@@ -382,9 +415,7 @@ fun FormPassword(
         Spacer(modifier = Modifier.padding(0.dp, 16.dp))
         PasswordInput(
             value = password,
-            onPasswordChange = {
-                password = it
-            }
+            onPasswordChange = onSetPassword
         )
     }
 }
